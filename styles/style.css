@@ -178,6 +178,10 @@ article h3 {
     line-height: 1;
 }
 
+.isFavorite {
+    color: #F5C518;
+}
+
 article .star-icon:hover {
     cursor: pointer;
     transform: scale(1.4);

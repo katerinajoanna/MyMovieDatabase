@@ -80,12 +80,14 @@ function renderTopMovies(movies) {
         const star = document.createElement('div');
         star.classList.add('star-icon');
         star.innerHTML = '<i class="material-icons" style="font-size: 31px;">star</i>';
-        star.addEventListener('click', function () {
-            if (star.style.color !== '#ffb92a') {
-                star.style.color = '#ffb92a';
+        star.addEventListener('click', function (event) {
+            if (!event.target.classList.contains('isFavorite')) {
+                console.log('favorit tillagd')
+                event.target.classList.add('isFavorite');
                 favoriteMovies.push(movie);
             } else {
-                star.style.color = '#ffb92a';
+                console.log('favorit borttagen')
+                event.target.classList.remove('isFavorite')
                 const index = favoriteMovies.findIndex(favMovie => favMovie.title === movie.title);
                 favoriteMovies.splice(index, 1);
             }
@@ -104,10 +106,10 @@ function renderTopMovies(movies) {
 
 
 document.querySelector("#favorites").classList.remove("hidden");
-
 document.querySelector("#closeFavorites").addEventListener("click", function () {
     document.querySelector("#favorites").classList.add("hidden");
 });
+
 
 
 function setupFavorites() {
