@@ -31,8 +31,58 @@ function setupCarousel() {
     });
 }
 
+//här lägger till search
+let movieNameRef = document.querySelector('#searchInput');
+let searchBtn = document.querySelector('#searchBtn');
+let result = document.querySelector('#result');
 
-//Läger till filmaffischer
+
+
+searchBtn.onclick = function (event) {
+    event.preventDefault();
+    const input = movieNameRef.value;
+    const url = `http://www.omdbapi.com/?t=${input}&apikey=4b7eec5b`;
+
+    fetch(url)
+        .then(response => response.json())
+        .then(data => {
+            console.log(data);
+
+            const resultsList = document.querySelector('#resultsList');
+
+            const newMovie = document.createElement('li');
+            newMovie.className = 'results__item';
+
+            const poster = document.createElement('div');
+            poster.className = 'movie-poster';
+            poster.style.backgroundImage = `url(${data.Poster})`;
+
+            const title = document.createElement('h3');
+            title.className = 'movie-title';
+            title.textContent = data.Title;
+
+            const plot = document.createElement('p');
+            plot.className = 'movie-plot';
+            plot.textContent = data.Plot;
+
+            const year = document.createElement('p');
+            year.className = 'movie-year';
+            year.textContent = `Year: ${data.Year}`;
+
+            newMovie.appendChild(poster);
+            newMovie.appendChild(title);
+            newMovie.appendChild(plot);
+            newMovie.appendChild(year);
+
+            resultsList.appendChild(newMovie);
+        })
+        .catch((error) => {
+            console.log(error);
+        });
+}
+
+
+//Lägger till filmaffischer
 async function fetchTopMovies() {
     try {
         const response = await fetch('http://santosnr6.github.io/Data/movies.json');
@@ -64,7 +114,7 @@ function renderTopMovies(movies) {
 
 function renderTopMovies(movies) {
     const popularCardContainer = document.querySelector('#popularCardContainer');
-    //tu modyfikuje dodajac favorit
+    //ändras genom att lägga till favorit
     const favoriteMovies = [];
 
     movies.forEach(movie => {
@@ -82,16 +132,16 @@ function renderTopMovies(movies) {
         star.innerHTML = '<i class="material-icons" style="font-size: 31px;">star</i>';
         star.addEventListener('click', function (event) {
             if (!event.target.classList.contains('isFavorite')) {
-                console.log('favorit tillagd')
+                console.log('favorit tillagd');
                 event.target.classList.add('isFavorite');
                 favoriteMovies.push(movie);
             } else {
-                console.log('favorit borttagen')
-                event.target.classList.remove('isFavorite')
+                console.log('favorit borttagen');
+                event.target.classList.remove('isFavorite');
                 const index = favoriteMovies.findIndex(favMovie => favMovie.title === movie.title);
                 favoriteMovies.splice(index, 1);
             }
-            console.log(favoriteMovies); // Zapisz zaznaczone filmy
+            console.log(favoriteMovies); // Spara valda filmer
         });
 
         const container = document.createElement('article');
@@ -105,10 +155,10 @@ function renderTopMovies(movies) {
 }
 
 
-document.querySelector("#favorites").classList.remove("hidden");
-document.querySelector("#closeFavorites").addEventListener("click", function () {
-    document.querySelector("#favorites").classList.add("hidden");
-});
+document.querySelector("#favorites").classList.remove("d-none");
+//document.querySelector("#closeFavorites").addEventListener("click", function () {
+//   document.querySelector("#favorites").classList.add("d-none");
+//});
 
 
 
@@ -119,16 +169,16 @@ function setupFavorites() {
 
     favBtn.addEventListener('click', () => {
         renderFavorites();
-        favorites.classList.remove('hidden');
+        favorites.classList.remove('d-none');
     });
 
     closeBtn.addEventListener('click', () => {
-        favorites.classList.add('hidden');
+        favorites.classList.add('d-none');
     });
 }
 
 
-//Funkcja do renderowania ulubionych filmów
+//Renderar favorita filmer
 function renderFavorites() {
     const favoriteMoviesContainer = document.querySelector('#favoriteMovies');
     favoriteMoviesContainer.innerHTML = '';
