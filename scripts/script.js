@@ -41,38 +41,57 @@ let result = document.querySelector('#result');
 searchBtn.onclick = function (event) {
     event.preventDefault();
     const input = movieNameRef.value;
-    const url = `http://www.omdbapi.com/?t=${input}&apikey=4b7eec5b`;
+    const url = `http://www.omdbapi.com/?s=${input}&apikey=4b7eec5b`;
 
     fetch(url)
         .then(response => response.json())
         .then(data => {
-            console.log(data);
-
+            console.log(data.Search);
+            document.querySelector('.results-container').classList.remove('d-none');
             const resultsList = document.querySelector('#resultsList');
 
-            const newMovie = document.createElement('li');
-            newMovie.className = 'results__item';
+            data.Search.forEach(movie => {
+                const newMovie = `
+                    <li class="results__item" data-id="${movie.imdbID}">
+                        <img src="${movie.Poster}" class="movie-poster" id="poster1">
+                        <h3 class="movie-title" id="title1">${movie.Title}</h3>
+                        <p class="movie-plot" id="plot1">${movie.Plot}</p>
+                        <p class="movie-year" id="year1">${movie.Year}</p>
+                    </li> 
+                    `;
 
-            const poster = document.createElement('div');
-            poster.className = 'movie-poster';
-            poster.style.backgroundImage = `url(${data.Poster})`;
+                resultsList.innerHTML += newMovie;
+            });
 
-            const title = document.createElement('h3');
-            title.className = 'movie-title';
-            title.textContent = data.Title;
+            //Läs in ALLA filmer från domen
+            //Lägg en lyssnare på varje film
+            //Kolla vilket imdbID den klickade filmen har
+            //Gör en DETALJERAD sökning på det klickade imdbIDt
 
-            const plot = document.createElement('p');
-            plot.className = 'movie-plot';
-            plot.textContent = data.Plot;
 
-            const year = document.createElement('p');
-            year.className = 'movie-year';
-            year.textContent = `Year: ${data.Year}`;
+            // const newMovie = document.createElement('li');
+            // newMovie.className = 'results__item';
 
-            newMovie.appendChild(poster);
-            newMovie.appendChild(title);
-            newMovie.appendChild(plot);
-            newMovie.appendChild(year);
+            // const poster = document.createElement('div');
+            // poster.className = 'movie-poster';
+            // poster.style.backgroundImage = `url(${data.Search.Poster})`;
+
+            // const title = document.createElement('h3');
+            // title.className = 'movie-title';
+            // title.textContent = data.Title;
+
+            // const plot = document.createElement('p');
+            // plot.className = 'movie-plot';
+            // plot.textContent = data.Plot;
+
+            // const year = document.createElement('p');
+            // year.className = 'movie-year';
+            // year.textContent = `Year: ${data.Year}`;
+
+            // newMovie.appendChild(poster);
+            // newMovie.appendChild(title);
+            // newMovie.appendChild(plot);
+            // newMovie.appendChild(year);
 
             resultsList.appendChild(newMovie);
         })
