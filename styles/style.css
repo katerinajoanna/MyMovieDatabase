@@ -139,6 +139,62 @@ body {
 
 
 /* Här skriver ni er CSS */
+.results {
+    font-size: 20px;
+    width: 90%;
+    margin: 5rem;
+    padding: 3rem 1.8rem;
+    display: flex;
+    flex-direction: column;
+    background-color: var(--text-bar);
+    color: var(--text-yellow);
+    text-align: center;
+}
+
+.results h2 {
+    margin-bottom: 1.5rem;
+}
+
+.results__item {
+    width: 90%;
+    display: grid;
+    grid-template-columns: 3fr 3fr;
+    justify-content: center;
+    align-items: center;
+    margin-left: 2.5rem;
+    margin-bottom: 7px;
+    border-radius: 8px;
+    list-style-type: none;
+    background-color: var(--primary-grey);
+    color: var(--primary-white);
+    font-size: 18px;
+}
+
+.movie-poster {
+    width: 70%;
+    padding: 1rem;
+    margin-left: 2.8rem;
+    margin-top: .4rem;
+    border-radius: .5rem;
+    object-fit: cover;
+    object-position: center;
+    cursor: pointer;
+}
+
+.movie-title {
+    font-size: 1.4rem;
+    margin-top: 1rem;
+    line-height: 1;
+}
+
+.movie-plot {
+    margin: 2.5rem 1rem;
+}
+
+.movie-year {
+    margin: 1rem 1rem;
+}
+
 .popular__title {
     padding: 2rem;
     margin-top: .8rem;
@@ -236,12 +292,25 @@ article img {
 }
 
 @media screen and (max-width: 750px) {
-    .content-wrapper {
+
+    .content-wrapper,
+    .results-container {
         width: 100%;
         margin: 0 auto;
         display: flex;
         flex-direction: column;
         row-gap: .8rem;
+    }
+
+    .results__item {
+        display: flex;
+        flex-direction: column;
+        margin: auto;
+        margin-bottom: 5px;
+    }
+
+    .movie-poster {
+        margin-right: 2.2rem;
     }
 
     #searchInput {

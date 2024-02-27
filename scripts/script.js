@@ -53,12 +53,14 @@ searchBtn.onclick = function (event) {
             data.Search.forEach(movie => {
                 const newMovie = `
                     <li class="results__item" data-id="${movie.imdbID}">
+                    <h3 class="movie-title" id="title1">${movie.Title}</h3>
+                    <i class="material-icons" style="font-size: 31px; margin-top: .6rem;">star</i>
                         <img src="${movie.Poster}" class="movie-poster" id="poster1">
-                        <h3 class="movie-title" id="title1">${movie.Title}</h3>
                         <p class="movie-plot" id="plot1">${movie.Plot}</p>
                         <p class="movie-year" id="year1">${movie.Year}</p>
-                    </li> 
-                    `;
+                        <p class="movie-imdbId" id="imdbId1">${movie.imdbID}</p>
+                    </li>
+                        `;
 
                 resultsList.innerHTML += newMovie;
             });
@@ -174,12 +176,10 @@ function renderTopMovies(movies) {
 }
 
 
-document.querySelector("#favorites").classList.remove("d-none");
+//document.querySelector("#favorites").classList.remove("d-none");
 //document.querySelector("#closeFavorites").addEventListener("click", function () {
 //   document.querySelector("#favorites").classList.add("d-none");
 //});
-
-
 
 function setupFavorites() {
     const favBtn = document.querySelector('#favBtn');
@@ -224,8 +224,3 @@ function renderFavorites() {
     });
 }
 
-fetchTopMovies()
-    .then(() => {
-        setupFavorites();
-
-    });
