@@ -144,6 +144,41 @@ function renderTopMovies(movies) {
         img.alt = movie.title;
         img.classList.add('movie-poster');
 
+        //---------------------------------------
+        //lägg till händelselysnare för filmer från domen
+        img.addEventListener('click', function () {
+            // visar info om filmen
+            //const infoPage = document.createElement('div');
+            // infoPage.classList.add('movie-info-page');
+            // Utwórz elementy informacyjne, takie jak tytuł, opis itp., etc.
+            //const movieDetails = document.querySelector('#movieDetails');
+            // movieDetails.innerHTML = '';
+            // img.addEventListener('click', function () {
+            //  window.location.href = "movie.html"; // till sida 
+            // });
+            //
+            // fetch('http://santosnr6.github.io/Data/movies.json')
+            //     .then(response => response.json())
+            //     .then(data => {
+            //         data.forEach(movie => {
+            //             const titleElement = document.createElement('h1');
+            //             titleElement.textContent = movie.title;
+
+            //             const plotElement = document.createElement('p');
+            //             plotElement.textContent = movie.plot;
+
+            //             movieDetails.appendChild(titleMovie);
+            //             movieDetails.appendChild(plotMovie);
+            //         });
+            //     });
+
+
+            // Dołącz elementy info do infoPage(append info)
+            // Wyświetl stronę informacyjną na ekranie
+            console.log('Visa info om filmen för: ' + movie.title);
+        });
+        //------------------------------------------------
+
         const title = document.createElement('h3');
         title.textContent = movie.title;
         title.classList.add('movie-title');
