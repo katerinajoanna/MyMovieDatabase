@@ -139,6 +139,7 @@ body {
 
 
 /* Här skriver ni er CSS */
+/*results-container*/
 .results {
     font-size: 20px;
     width: 90%;
@@ -146,35 +147,39 @@ body {
     padding: 3rem 1.8rem;
     display: flex;
     flex-direction: column;
-    background-color: var(--text-bar);
+    justify-content: center;
+    align-items: center;
     color: var(--text-yellow);
     text-align: center;
 }
 
 .results h2 {
     margin-bottom: 1.5rem;
+    font-size: 25px;
+    font-family: sans-serif;
 }
 
 .results__item {
-    width: 90%;
-    display: grid;
-    grid-template-columns: 3fr 3fr;
+    width: 75%;
+    display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
-    margin-left: 2.5rem;
+    margin-left: 3.5rem;
     margin-bottom: 7px;
     border-radius: 8px;
     list-style-type: none;
     background-color: var(--primary-grey);
     color: var(--primary-white);
     font-size: 18px;
+    font-family: sans-serif;
 }
 
 .movie-poster {
     width: 70%;
     padding: 1rem;
-    margin-left: 2.8rem;
     margin-top: .4rem;
+    background-color: var(--text-bar);
     border-radius: .5rem;
     object-fit: cover;
     object-position: center;
@@ -182,13 +187,11 @@ body {
 }
 
 .movie-title {
-    font-size: 1.4rem;
-    margin-top: 1rem;
+    font-size: 19px;
+    font-family: sans-serif;
+    margin-top: 1.5rem;
+    margin-bottom: 1.5rem;
     line-height: 1;
-}
-
-.movie-plot {
-    margin: 2.5rem 1rem;
 }
 
 .movie-year {
@@ -199,20 +202,20 @@ body {
     padding: 2rem;
     margin-top: .8rem;
     text-align: center;
-    font-family: Verdana, sans-serif;
-    font-style: oblique;
+    font-family: sans-serif;
     font-size: 35px;
+    font-weight: 400;
     color: var(--text-yellow);
     background-color: var(--text-bar);
+    border-radius: 1rem 1rem 0 0;
 }
-
 
 .popular__card-container {
     width: 100%;
     padding: 3rem;
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    gap: 1.4rem;
+    gap: 2rem;
     background-color: var(--header-grey);
     color: var(--primary-white);
     overflow: hidden;
@@ -222,8 +225,7 @@ body {
 }
 
 article {
-    max-width: 110%;
-    padding-bottom: 1rem;
+    padding-bottom: 2rem;
     padding-top: 1rem;
     border-radius: .8rem;
     background-color: var(--primary-grey);
@@ -255,6 +257,66 @@ article img {
     cursor: pointer;
 }
 
+.details {
+    width: 80%;
+    background-color: var(--primary-grey);
+    font-family: sans-serif;
+    margin-top: 2rem;
+    padding: .2rem;
+    border-radius: 1rem;
+    display: flex;
+    flex-direction: row;
+    gap: 2rem;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+
+.info-heading h2 {
+
+    font-size: 25px;
+    padding: .7rem;
+
+}
+
+.info-heading img {
+    width: 60%;
+    padding: 1rem;
+    background-color: var(--text-bar);
+    border-radius: .5rem;
+}
+
+.info-heading p {
+    font-size: 15px;
+    font-weight: 400;
+    padding: .7rem;
+    letter-spacing: 2px;
+}
+
+
+.info-movie {
+    width: 60%;
+    font-weight: 400;
+    text-align: center;
+    letter-spacing: 1.5px;
+}
+
+.info-movie h3 {
+    padding: .5rem;
+}
+
+.info-movie .info-year {
+    padding-top: 1rem;
+}
+
+.info-movie .info-time {
+    padding-bottom: 1rem;
+}
+
+.info-movie .info-plot {
+    text-align: left;
+}
 
 /* Media Queries */
 @media screen and (max-width: 1380px) {
@@ -270,6 +332,10 @@ article img {
         height: 100%;
         margin: 0 auto;
         row-gap: 1.5rem;
+    }
+
+    .movie-poster {
+        width: 100%;
     }
 
     .popular__title {
@@ -289,6 +355,10 @@ article img {
         padding: 5px;
         margin: 5px;
     }
+
+    .info-heading img {
+        margin-left: 2rem;
+    }
 }
 
 @media screen and (max-width: 750px) {
@@ -306,11 +376,24 @@ article img {
         display: flex;
         flex-direction: column;
         margin: auto;
+        /*tu skasowacmargin??*/
         margin-bottom: 5px;
     }
 
+    .results h2 {
+        margin-top: 1.5rem;
+        font-size: 30px;
+    }
+
     .movie-poster {
-        margin-right: 2.2rem;
+        width: 100%;
+        padding: 1rem;
+        margin-top: .4rem;
+        border-radius: .5rem;
+        object-fit: cover;
+        object-position: center;
+        cursor: pointer;
+        background-color: var(--text-bar);
     }
 
     #searchInput {

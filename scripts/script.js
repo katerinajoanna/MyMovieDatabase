@@ -54,23 +54,20 @@ searchBtn.onclick = function (event) {
                 console.log(movie);
                 newMovie += `
                     <li class="results__item" data-id="${movie.imdbID}">
-                    <h3 class="movie-title" id="title1">${movie.Title}</h3>
-                    <i class="material-icons" style="font-size: 31px; margin-top: .6rem;">star</i>
+                        <h3 class="movie-title" id="title1">${movie.Title}</h3>
+                        <i class="material-icons" style="font-size: 31px; margin-top: .6rem;">star</i>
                         <img src="${movie.Poster}" class="movie-poster" id="poster1">
-                      
-                        
-                        <p class="movie-year" id="year1">${movie.Year}</p>
-                        <p class="movie-imdbId" id="imdbId1">${movie.imdbID}</p>
-                    </li>
+                          <p class="movie-year" id="year1">${movie.Year}</p>
+                         </li>
                         `;
-
                 resultsList.innerHTML += newMovie;
             });
+
 
             document.querySelectorAll('.results__item').forEach(item => {
                 item.addEventListener("click", () => {
                     const selectedId = item.getAttribute('data-id');
-                    console.log(selectedId)
+                    console.log(selectedId);
                     const selectedMovie = data.Search.find(movie => movie.imdbID === selectedId);
                     console.log(selectedMovie);
                     //   operationer på den valda videon
@@ -91,12 +88,6 @@ searchBtn.onclick = function (event) {
                         });
                 });
             });
-
-            //Läs in ALLA filmer från domen
-            //Lägg en lyssnare på varje film
-            //Kolla vilket imdbID den klickade filmen har
-            //Gör en DETALJERAD sökning på det klickade imdbIDt
-
 
             // const newMovie = document.createElement('li');
             // newMovie.className = 'results__item';
@@ -138,17 +129,25 @@ function renderMovieDetails(movie) {
     //Ersätt denna styling med riktig css istället
     details.style.color = 'white';
 
-    //Inuti din detaljerade film stoppar du in mer information
-    //Exempelvis Actors, Director, Plot, Rating osv osv.
-    //Styla snyggt!
     const movieDetailsCard = `
-        <img src="${movie.Poster}">
-        <h2 class="movie-heading">${movie.Title}</h2>
-    `;
+        <div class="info-heading">
+            <h2 >${movie.Title}</h2>
+            <img src="${movie.Poster}">
+            <p>${movie.Genre}</p>
+        </div>
+        <div class="info-movie">
+            <h3>Actors:</h3>
+            <p>${movie.Actors}</p>
+            <h3 class="info-year">Year: ${movie.Year}</h3>
+            <h3 class="info-time">Runtime: ${movie.Runtime}</h3>
+            <h3 class"info-rating">Rating: ${movie.imdbRating}</h3>
+            <h3>Plot: </h3>
+            <p>${movie.Plot}</p>
+        </div>
+`;
 
     details.innerHTML = movieDetailsCard;
 }
-
 
 //Lägger till filmaffischer
 async function fetchTopMovies() {
@@ -166,7 +165,6 @@ async function fetchTopMovies() {
 }
 
 function renderTrailers(movies) {
-
     const iframes = document.querySelectorAll('iframe');
     iframes.forEach(iframe => {
         const link = movies.splice(Math.floor(Math.random() * movies.length), 1)[0].trailer_link;
@@ -191,40 +189,15 @@ function renderTopMovies(movies) {
         img.alt = movie.title;
         img.classList.add('movie-poster');
 
-        //---------------------------------------
+
         //lägg till händelselysnare för filmer från domen
         img.addEventListener('click', function () {
-            ////visar info om filmen
-            //const infoPage = document.createElement('div');
-            // infoPage.classList.add('movie-info-page');
-            // //stworzyc elementy informacyjne, takie jak tytuł, opis itp., etc.
-            //const movieDetails = document.querySelector('#movieDetails');
-            // movieDetails.innerHTML = '';
-            // img.addEventListener('click', function () {
-            //  window.location.href = "movie.html"; // till sida movie.html
-            // });
-            //
-            // fetch('http://santosnr6.github.io/Data/movies.json')
-            //     .then(response => response.json())
-            //     .then(data => {
-            //         data.forEach(movie => {
-            //             const titleElement = document.createElement('h1');
-            //             titleElement.textContent = movie.title;
-
-            //             const plotElement = document.createElement('p');
-            //             plotElement.textContent = movie.plot;
-
-            //             movieDetails.appendChild(titleMovie);
-            //             movieDetails.appendChild(plotMovie);
-            //         });
-            //     });
 
 
             // Dołącz elementy info do infoPage(append info)
             // Wyświetl stronę informacyjną na ekranie
             console.log('Visa info om filmen för: ' + movie.title);
         });
-        //------------------------------------------------
 
         const title = document.createElement('h3');
         title.textContent = movie.title;
@@ -257,12 +230,6 @@ function renderTopMovies(movies) {
     })
 }
 
-
-//document.querySelector("#favorites").classList.remove("d-none");
-//document.querySelector("#closeFavorites").addEventListener("click", function () {
-//   document.querySelector("#favorites").classList.add("d-none");
-//});
-
 function setupFavorites() {
     const favBtn = document.querySelector('#favBtn');
     const favorites = document.querySelector('#favorites');
@@ -277,7 +244,6 @@ function setupFavorites() {
         favorites.classList.add('d-none');
     });
 }
-
 
 //Renderar favorita filmer
 function renderFavorites() {
