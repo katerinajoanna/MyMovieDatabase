@@ -36,8 +36,6 @@ let movieNameRef = document.querySelector('#searchInput');
 let searchBtn = document.querySelector('#searchBtn');
 let result = document.querySelector('#result');
 
-
-
 searchBtn.onclick = function (event) {
     event.preventDefault();
     const input = movieNameRef.value;
@@ -51,15 +49,16 @@ searchBtn.onclick = function (event) {
             document.querySelector('.results-container').classList.remove('d-none');
             const resultsList = document.querySelector('#resultsList');
 
+            resultsList.innerHTML = '';
             data.Search.forEach(movie => {
+                console.log(movie);
                 newMovie += `
                     <li class="results__item" data-id="${movie.imdbID}">
                     <h3 class="movie-title" id="title1">${movie.Title}</h3>
                     <i class="material-icons" style="font-size: 31px; margin-top: .6rem;">star</i>
                         <img src="${movie.Poster}" class="movie-poster" id="poster1">
-                        <h4>Actors: </h4>
-                        <p class="movie-actors" id="actors1">${movie.Actors}</p>
-                        <p class="movie-plot" id="plot1">${movie.Plot}</p>
+                      
+                        
                         <p class="movie-year" id="year1">${movie.Year}</p>
                         <p class="movie-imdbId" id="imdbId1">${movie.imdbID}</p>
                     </li>
@@ -71,16 +70,25 @@ searchBtn.onclick = function (event) {
             document.querySelectorAll('.results__item').forEach(item => {
                 item.addEventListener("click", () => {
                     const selectedId = item.getAttribute('data-id');
+                    console.log(selectedId)
                     const selectedMovie = data.Search.find(movie => movie.imdbID === selectedId);
                     console.log(selectedMovie);
                     //   operationer på den valda videon
-                    const title = selectedMovie.Title;
-                    const plot = selectedMovie.Plot;
-                    const year = selectedMovie.Year;
-                    const imdbId = selectedMovie.imdbID;
 
-                    console.log(`${title} - ${year}`);
-                    console.log(`${plot}`);
+                    // Klickade filmens id sparas i selectedId
+
+                    const url = `http://www.omdbapi.com/?i=${selectedId}&plot=full&apikey=4b7eec5b`
+                    fetch(url)
+                        .then(response => {
+                            return response.json();
+                        })
+                        .then(data => {
+                            console.log(data);
+                            renderMovieDetails(data);
+                        })
+                        .catch(error => {
+                            console.log(error);
+                        });
                 });
             });
 
@@ -119,25 +127,26 @@ searchBtn.onclick = function (event) {
         .catch((error) => {
             console.log(error);
         });
+}
 
-    // hämtar objekt med klassen 'results__item' från HTML-dokument
-    const movieItems = document.querySelectorAll('.results__item');
-    movieItems.forEach(movie => {
-        movie.addEventListener('click', function () {
-            const imdbID = movie.dataset.id;
-            const url = `http://www.omdbapi.com/?apikey=4b7eec5b&plot=full&i={imdb-ID}`;
-            fetch(url)
-                .then(response => response.json())
-                .then(data => {
-                    console.log(data);
-                    //  den detaljerade sökinformationen här
-                })
-                .catch(error => {
-                    console.log(error);
-                });
-        });
-    });
+function renderMovieDetails(movie) {
+    const results = document.querySelector('.results-container');
+    results.classList.add('d-none');
+    const detailsContainer = document.querySelector('.details-container');
+    detailsContainer.classList.remove('d-none');
+    const details = document.querySelector('.details');
+    //Ersätt denna styling med riktig css istället
+    details.style.color = 'white';
 
+    //Inuti din detaljerade film stoppar du in mer information
+    //Exempelvis Actors, Director, Plot, Rating osv osv.
+    //Styla snyggt!
+    const movieDetailsCard = `
+        <img src="${movie.Poster}">
+        <h2 class="movie-heading">${movie.Title}</h2>
+    `;
+
+    details.innerHTML = movieDetailsCard;
 }
 
 
