@@ -192,10 +192,6 @@ function renderTopMovies(movies) {
 
         //lägg till händelselysnare för filmer från domen
         img.addEventListener('click', function () {
-
-
-            // Dołącz elementy info do infoPage(append info)
-            // Wyświetl stronę informacyjną na ekranie
             console.log('Visa info om filmen för: ' + movie.title);
         });
 
