@@ -141,8 +141,8 @@ function renderMovieDetails(movie) {
             <h3 class="info-year">Year: ${movie.Year}</h3>
             <h3 class="info-time">Runtime: ${movie.Runtime}</h3>
             <h3 class"info-rating">Rating: ${movie.imdbRating}</h3>
-            <h3>Plot: </h3>
-            <p>${movie.Plot}</p>
+            <h3 >Plot: </h3>
+            <p class="info-plot">${movie.Plot}</p>
         </div>
 `;
 
