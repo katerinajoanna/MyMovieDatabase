@@ -127,7 +127,7 @@ function renderMovieDetails(movie) {
     detailsContainer.classList.remove('d-none');
     const details = document.querySelector('.details');
     //Ersätt denna styling med riktig css istället
-    details.style.color = 'white';
+    details.style.color = '#e5e3e3';
 
     const movieDetailsCard = `
         <div class="info-heading">

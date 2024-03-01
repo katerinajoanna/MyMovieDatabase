@@ -2,7 +2,7 @@
 :root {
     --header-grey: #121212;
     --primary-black: #000000;
-    --primary-white: #ffffff;
+    --primary-white: #e5e3e3;
     --primary-grey: #1A1A1A;
     --text-yellow: #F5C518;
     --text-blue: #5595E7;
@@ -363,9 +363,16 @@ article img {
         margin: 5px;
     }
 
+    .details-container {
+        width: 90%;
+        margin: auto;
+        margin-top: 1.2rem;
+    }
+
     .info-heading img {
         margin-left: 2rem;
     }
+
 }
 
 @media screen and (max-width: 750px) {
@@ -427,6 +434,10 @@ article img {
         font-weight: 500;
         font-size: 19px;
         padding: .2rem;
+    }
+
+    .details-container {
+        margin-top: 1rem;
     }
 
     .info-movie {
