@@ -126,7 +126,7 @@ function renderMovieDetails(movie) {
     const detailsContainer = document.querySelector('.details-container');
     detailsContainer.classList.remove('d-none');
     const details = document.querySelector('.details');
-    //Ersätt denna styling med riktig css istället
+
     details.style.color = '#e5e3e3';
 
     const movieDetailsCard = `
@@ -141,7 +141,7 @@ function renderMovieDetails(movie) {
             <h3 class="info-year">Year: ${movie.Year}</h3>
             <h3 class="info-time">Runtime: ${movie.Runtime}</h3>
             <h3 class"info-rating">Rating: ${movie.imdbRating}</h3>
-            <h3 >Plot: </h3>
+            <h3>Plot: </h3>
             <p class="info-plot">${movie.Plot}</p>
         </div>
 `;

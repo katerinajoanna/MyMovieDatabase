@@ -175,7 +175,6 @@ body {
     font-family: sans-serif;
 }
 
-/*fixa det i js*/
 .results__item i:hover {
     cursor: pointer;
     transform: scale(1.4);
@@ -279,12 +278,10 @@ article img {
     text-align: center;
 }
 
-
 .info-heading h2 {
 
     font-size: 25px;
     padding: .7rem;
-
 }
 
 .info-heading img {
